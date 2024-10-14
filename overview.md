@@ -19,7 +19,7 @@ for the deployment of SAP on IBM Power Virtual Server (PowerVS) to:
 
 - Accelerate and simplify solution design by providing a standard IBM Cloud deployment architecture reference solution for SAP on IBM PowerVS enterprise-class deployments following the [IBM Architecture Framework](/docs/architecture-framework?topic=architecture-framework-intro).
 
-- Provide a prescriptive, end-2-end enterprise-class solution design, with diagrams, component architecture decisions along with rationale for cloud component selection for a secure, resilient SAP on PowerVS deployment.
+- Provide a prescriptive, end-2-end enterprise-class solution design with diagrams, component architecture decisions along with rationale for cloud component selection for a secure, resilient SAP on PowerVS deployment.
 
 - Ensure that requirements can be met from performance, system availability, and security perspectives.
 
