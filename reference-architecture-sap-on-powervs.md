@@ -52,33 +52,22 @@ Figure 1 illustrates a high-level summary of the Use Case, an SAP Single-zone, m
 
 Figure 2 illustrates a detailed network and component architecture for a single-zone, multi-region deployment to facilitate disaster recovery.
 
-![illustrates a detailed network and component architecture for a
-single-zone, multi-region deployment to facilitate disaster recovery](image2.png){: caption="Figure 2. A single-zone, multi-region deployment to facilitate disaster recovery" caption-side="bottom"}
+![SAP Single-zone, multi-region deployment to facilitate disaster recovery](image2.png){: caption="Figure 2. A single-zone, multi-region deployment to facilitate disaster recovery" caption-side="bottom"}
 
 ### Architecture description
 {: #architecture-description}
 
-1. Two separate IBM Cloud regions, one for Primary workload and the other for Disaster Recovery. If Cost Optimized Disaster Recovery is considered, some Non Production systems may share the same compute with Disaster Recovery systems. 
-
-2. Client network connectivity is accomplished through Direct Links to each region with VPN access for MSPs.
-
-3. An Edge VPC is deployed which contains routing and security functions. For security purposes, all ingress and egress traffic will route through the Edge VPC. It contains an sFTP server, Bastion host (jump), Firewalls providing advanced security functions and the SAP router and Web Dispatcher.
-
-4. The Edge VPC is connected to PowerVS through a local Transit Gateway and hosts the SAP application and databases.
-
-5. Public connectivity routes through Cloud Internet services that can provide load balancing, failover, and DDoS services, then routes to the edge VPC
-
-6. PowerVS contains SAP Application components that are hosted on redundant SAP certified LPARS in an [SAP Scale-out](/docs/sap?topic=sap-refarch-hana-scaleout#network-layout-for-scale-out-configurations-2) environment.
-
-7. SAP HANA is hosted on separate SAP certified LPARs in the same zone, by using local Tier 1 storage.
-
-8. Virtual Private endpoints are used to provide connectivity to cloud native services
-
-9. Global Transit Gateway connecting PowerVS across regions for data replication purposes between the two regions.
-
-10. Multiple LPARs are used to provide 99.95% availability within a zone
-
-11. Bare Metals in classic to provide backups by using IBM Storage Protect
+1.	Two separate IBM Cloud regions, one for Primary workload and the other for Disaster Recovery. If Cost Optimized Disaster Recovery is considered, some Non Production systems may share the same compute with Disaster Recovery systems. 
+2.	Enterprise network connectivity from On-premise to IBM Cloud is accomplished through Direct Links. 
+3.	A VPC Landing Zone (Edge VPC) is deployed which contains routing and security functions.  For security purposes, all ingress and egress traffic will route through the VPC Landing Zone.  It contains a Bastion host (jump), Firewalls providing advanced security functions and the SAP router and SAP Web Dispatcher.  
+4.	Besides Power Workloads in Power workspace, x86 workloads may be implemented in a Workload VPC. To backup Power workloads, Secure Automated Backup with Compass by Cobalt Iron is implemented. The private end point for this backup service is located in VPC. 
+5.	VPCs are connected to Power workspace through a local Transit Gateway 
+6.	Public connectivity routes through Cloud Internet Services which can provide global load balancing, failover, and DDoS services, then routes to the VPC Landing Zone
+7.	SAP workloads may be hosted on redundant SAP certified LPARS in PowerVS 
+8.	SAP Application and SAP HANA should be placed on SAP certified LPARs within the zone with proximity considered
+9.	Virtual Private endpoints in VPCs are used to provide connectivity to cloud native services 
+10.	Global Transit Gateway connecting Power workspace across regions for data replication purposes between the two regions.
+11.	To achieve 99.95% infrastructure availability, multiple LPARs in the same placement group within a zone can be implemented
 
 ## Design scope
 {: #design-scope}
